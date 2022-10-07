@@ -6,6 +6,7 @@ use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 use Illuminate\Support\Auth;
 use App\Models\Category;
+use App\Models\Tag;
 use App\User;
 
 class PostSeeder extends Seeder
@@ -39,6 +40,8 @@ class PostSeeder extends Seeder
             foreach($tag_ids as $tag_id) {
                 if($faker->boolean()) $post_tags = $tag_id;
             }
+
+            $new_post->
         }
     }
 }

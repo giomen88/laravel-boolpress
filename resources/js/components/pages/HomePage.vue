@@ -1,7 +1,9 @@
 <template>
   <div class="container">
-    <h1 class="mt-3 text-center">POSTS</h1>
-    <PostCard v-for="post in posts" :key="post.id" :post="post" />
+    <h1 class="mt-3">LISTA POST</h1>
+    <div class="post-list d-flex flex-wrap">
+      <PostCard v-for="post in posts" :key="post.id" :post="post" />
+    </div>
   </div>
 </template>
 
@@ -32,3 +34,8 @@ export default {
   },
 };
 </script>
+<style>
+.post-list {
+  margin: 0 -20px;
+}
+</style>

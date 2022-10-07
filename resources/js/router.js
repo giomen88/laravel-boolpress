@@ -10,9 +10,10 @@ Vue.use(VueRouter)
 const routes = new VueRouter({
     mode: 'history',
     routes: [
-        {path: '/', component: HomePage, name: 'homepage' },
-        {path: '/about', component: AboutPage, name: 'aboutpage' },
-        {path: '/contacts', component: ContactsPage, name: 'contactspage' },
+        {path: '/', component: HomePage, name: 'HomePage' },
+        {path: '/about', component: AboutPage, name: 'AboutPage' },
+        {path: '/contacts', component: ContactsPage, name: 'ContactsPage' },
+        // {path: '/posts/{}', component: PostDetailsPage, name: 'PostDetailsPage' },
     ]
 });
 

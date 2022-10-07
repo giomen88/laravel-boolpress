@@ -19,17 +19,17 @@
             <router-link
               class="nav-link active"
               aria-current="page"
-              :to="{ name: 'homepage' }"
+              :to="{ name: 'HomePage' }"
               >Home</router-link
             >
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" :to="{ name: 'aboutpage' }"
+            <router-link class="nav-link" :to="{ name: 'AboutPage' }"
               >About</router-link
             >
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" :to="{ name: 'contactspage' }"
+            <router-link class="nav-link" :to="{ name: 'ContactsPage' }"
               >Contacts</router-link
             >
           </li>

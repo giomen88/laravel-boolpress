@@ -27,7 +27,21 @@
             @endforeach
         </select>
     </div>
-        <div class="form-group d-flex justify-content-between align-items-end">
+    @if(count($tags))
+        <h6>Tags</h6>
+        @foreach ($tags as $tag)
+            <div class="form-check form-check-inline">
+                <input type="checkbox"
+                id="tag-{{ $tag->label }}"
+                name="tags[]"
+                value="{{ $tag->id }}" 
+                @if(in_array($tag->id, old('tags', $prev_tags ?? []))) checked @endif>
+
+                <label class="form-check-label mx-2" for="tag-{{ $tag->label }}">{{ $tag->label }}</label>
+            </div>
+        @endforeach
+    @endif    
+        <div class="form-group d-flex justify-content-between align-items-end mt-3">
             <div class="d-flex flex-column">
                 <label for="image" class="form-label">Immagine</label>
                 <input type="file" id="image" name="image">

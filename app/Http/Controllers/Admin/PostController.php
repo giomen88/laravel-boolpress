@@ -39,7 +39,9 @@ class PostController extends Controller
 
         $categories = Category::all();
 
-        return view('admin.posts.create', compact('post', 'categories'));
+        $tags = Tag::all();
+
+        return view('admin.posts.create', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -95,9 +97,14 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+    
         $users = User::all();
 
-        return view('admin.posts.show', compact('post', 'users'));
+        $categories = Category::all();
+
+        $tags = Tag::all();
+
+        return view('admin.posts.show', compact('post', 'users', 'categories', 'tags'));
     }
 
     /**
@@ -110,7 +117,9 @@ class PostController extends Controller
     {
         $categories = Category::all();
 
-        return view('admin.posts.edit', compact('post', 'categories'));
+        $tags = Tag::all();
+
+        return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
