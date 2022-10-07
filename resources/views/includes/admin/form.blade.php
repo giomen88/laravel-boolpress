@@ -32,6 +32,6 @@
                 <label for="image" class="form-label">Immagine</label>
                 <input type="file" id="image" name="image">
             </div>
-            <img src=" {{ $post->image ?? 'https://usbforwindows.com/storage/img/images_3/function_set_default_image_when_image_not_present.png' }} " alt="post image preview" class="img-fluid" id="preview">
+            <img src=" {{ $post->image ? asset('storage/'.$post->image) : 'placeholder' }} " alt="{{ $post->image ? $post->slug : 'https://usbforwindows.com/storage/img/images_3/function_set_default_image_when_image_not_present.png' }}" class="img-fluid" id="preview">
         </div>
 
