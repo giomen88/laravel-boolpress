@@ -28,9 +28,9 @@
         </select>
     </div>
         <div class="form-group d-flex justify-content-between align-items-end">
-            <div class="url-input">
-                <label for="image" class="form-label">URL Immagine</label>
-                <input type="url" class="form-control" id="image" name="image" placeholder="URL" value=" {{old('image', $post->image)}} " required>
+            <div class="d-flex flex-column">
+                <label for="image" class="form-label">Immagine</label>
+                <input type="file" id="image" name="image">
             </div>
             <img src=" {{ $post->image ?? 'https://usbforwindows.com/storage/img/images_3/function_set_default_image_when_image_not_present.png' }} " alt="post image preview" class="img-fluid" id="preview">
         </div>

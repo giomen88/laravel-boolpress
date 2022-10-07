@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Category;
+use App\Models\Tag;
+use App\User;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
-use App\Models\Category;
-use App\User;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -51,14 +53,15 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|string|min:3|max:50|unique:posts',
             'content' => 'required|string',
-            'image' => 'nullable|url'
+            'image' => 'nullable|image|mimes:jpeg,jpg,png'
         ], [
             'title.required' => 'Il titolo è obbligatorio',
             'title.min:5' => 'Il titolo è inferiore a 5 caratteri',
             'title.max:50' => 'Il titolo è superiore a 50 caratteri',
             'title.unique' => "Esiste già un post dal titolo $request->title",
             'content.required' => 'Il contenuto è obbligatorio',
-            'image.url' => 'L/URL dell/immagine non è valida',
+            'image.image' => 'Il file caricato non è un\'immagine',
+            'image.mimes' => 'Il formato non è valido',
         ]);
 
         $data = $request->all();
@@ -69,11 +72,15 @@ class PostController extends Controller
 
         $post->slug = Str::slug($post->title, '-');
 
+        if(array_key_exists('image', $data)) {
+            $image_url = Storage::put('post_images', $data['image']);
+            $post->image = $image_url;
+        }
+
         $post->save();
 
-        if(array_key_exists('tags', $data)) {
-            $post->tags()->attach($data['tags']);
-        }
+        if(array_key_exists('tags', $data)) $post->tags()->attach($data['tags']);
+        
 
         return redirect()->route('admin.posts.show', $post)
         ->with('message', 'Il post è stato creato con successo')

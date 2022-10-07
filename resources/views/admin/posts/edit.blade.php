@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-12">
             <h1>MODIFICA POST</h1>
-            <form action=" {{route('admin.posts.update', $post)}} " method="POST">
+            <form action=" {{route('admin.posts.update', $post)}} " enctype="multipart/form-data" method="POST">
             @csrf
             @method('PUT')
             @include('includes.admin.form')

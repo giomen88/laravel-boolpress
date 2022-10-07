@@ -7,11 +7,11 @@
             <h1 class="mb-4">{{$post->title}}</h1>
             <div class="row">
                 <div class="col-3">
-                    <img src="{{$post->image}}" class="img-fluid" alt="{{$post->title}}">
+                    <img src="{{asset('storage/'.$post->image)}}" class="img-fluid" alt="{{$post->title}}">
                 </div>
                 <div class="col-9">
-                    @if($post->category) <span class="mb-3 badge bg-{{ $post->category->color }}">{{$post->category->label}}</span> 
-                    @else <span>NESSUNA CATEGORIA</span> @endif
+                    @if($post->category) <span class="mb-3"><strong>Categoria:</strong> {{$post->category->label}}</span> 
+                    @else <span><strong>Categoria:</strong> NESSUNA CATEGORIA</span> @endif
                     <p class="mt-3">{{$post->content}}</p>
                     <p><strong class="text-muted">Autore</strong></p>
                     <p><small class="text-muted"><strong>Ultima modifica</strong>  {{$post->updated_at}}</small></p>
