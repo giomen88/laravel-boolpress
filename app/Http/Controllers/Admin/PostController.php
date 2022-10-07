@@ -125,14 +125,15 @@ class PostController extends Controller
         $request->validate([
             'title' => ['required','string','min:3', 'max:50', Rule::unique('posts')->ignore($post->id)],
             'content' => 'required|string',
-            'image' => 'nullable|url'
+            'image' => 'nullable|image|mimes:jpeg,jpg,png'
         ], [
             'title.required' => 'Il titolo è obbligatorio',
             'title.min:5' => 'Il titolo è inferiore a 5 caratteri',
             'title.max:50' => 'Il titolo è superiore a 50 caratteri',
             'title.unique' => "Esiste già un post dal titolo $request->title",
             'content.required' => 'Il contenuto è obbligatorio',
-            'image.url' => 'L/URL dell/immagine non è valida',
+            'image.image' => 'Il file caricato non è un\'immagine',
+            'image.mimes' => 'Il formato non è valido',
         ]);
 
         $data = $request->all();
@@ -141,6 +142,12 @@ class PostController extends Controller
 
         if(array_key_exists('tags', $data)) {
             $post->tags()->sync($data['tags']);
+        }
+
+        if(array_key_exists('image', $data)) {
+            if($post->image) Storage::delete($post->image);
+            $image_url = Storage::put('post_images', $data['image']);
+            $post->image = $image_url;
         }
 
         $post->update($data);
@@ -159,6 +166,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        if($post->image) Storage::delete($post->image);
+
         $post->delete();
 
         return redirect()->route('admin.posts.index')
