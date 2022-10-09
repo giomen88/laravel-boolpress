@@ -8,9 +8,13 @@ use App\Models\Post;
 use App\Models\Category;
 use App\Models\Tag;
 use App\User;
+use App\Mail\PostConfirmMarkdownMail;
+
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class PostController extends Controller
 {
@@ -73,6 +77,7 @@ class PostController extends Controller
         $post->fill($data);
 
         $post->slug = Str::slug($post->title, '-');
+        $post->user_id = Auth::id();
 
         if(array_key_exists('image', $data)) {
             $image_url = Storage::put('post_images', $data['image']);
@@ -83,6 +88,10 @@ class PostController extends Controller
 
         if(array_key_exists('tags', $data)) $post->tags()->attach($data['tags']);
         
+        // invio mail all'autore del post
+        $mail = new PostConfirmMarkdownMail($post);
+        $user_email = Auth::user()->email;
+        Mail::to($user_email)->send($mail);
 
         return redirect()->route('admin.posts.show', $post)
         ->with('message', 'Il post è stato creato con successo')

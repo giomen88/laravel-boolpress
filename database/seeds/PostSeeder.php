@@ -41,7 +41,6 @@ class PostSeeder extends Seeder
                 if($faker->boolean()) $post_tags = $tag_id;
             }
 
-            $new_post->
         }
     }
 }
