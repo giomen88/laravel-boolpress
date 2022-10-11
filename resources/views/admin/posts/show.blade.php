@@ -15,8 +15,8 @@
                         @else <span><strong>Categoria:</strong> NESSUNA CATEGORIA</span> @endif
                     </div>
                     <div class="tags">
-                        @if(count($tags))
-                            @foreach($tags as $tag)
+                        @if(count($post->tags))
+                            @foreach($post->tags as $tag)
                                 <span class="badge rounded-pill" style="background-color: {{$tag->color}}">{{$tag->label}}</span>
                             @endforeach
                         @endif
@@ -24,8 +24,8 @@
 
                     <p class="mt-3">{{$post->content}}</p>
                     <p><strong>Autore:</strong> @if($post->user) {{$post->user->name}} @else Anonimo @endif </p>
-                    <p><small class="text-muted"><strong>Creato il:</strong>  {{$post->getCreatedAt}}</small></p>
-                    <p><small class="text-muted"><strong>Ultima modifica:</strong>  {{$post->getUpdatedAt}}</small></p>
+                    <p><small class="text-muted"><strong>Creato il:</strong>  {{$post->created_at}}</small></p>
+                    <p><small class="text-muted"><strong>Ultima modifica:</strong>  {{$post->updated_at}}</small></p>
                 </div>
             </div>
             <div class="col-12 buttons d-flex justify-content-between mt-5 p-0">

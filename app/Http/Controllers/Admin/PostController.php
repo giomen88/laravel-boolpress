@@ -86,7 +86,9 @@ class PostController extends Controller
 
         $post->save();
 
-        if(array_key_exists('tags', $data)) $post->tags()->attach($data['tags']);
+        // dd($data['tags']);
+
+        if(array_key_exists('tags', $data)) $post->tags()->sync($data['tags']);
         
         // invio mail all'autore del post
         $mail = new PostConfirmMarkdownMail($post);
