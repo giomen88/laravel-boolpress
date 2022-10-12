@@ -24,8 +24,8 @@
 
                     <p class="mt-3">{{$post->content}}</p>
                     <p><strong>Autore:</strong> @if($post->user) {{$post->user->name}} @else Anonimo @endif </p>
-                    <p><small class="text-muted"><strong>Creato il:</strong>  {{$post->created_at}}</small></p>
-                    <p><small class="text-muted"><strong>Ultima modifica:</strong>  {{$post->updated_at}}</small></p>
+                    <p><small class="text-muted"><strong>Creato il:</strong>  {{$post->getCreatedAt()}}</small></p>
+                    <p><small class="text-muted"><strong>Ultima modifica:</strong>  {{getUpdatedAt()}}</small></p>
                 </div>
             </div>
             <div class="col-12 buttons d-flex justify-content-between mt-5 p-0">

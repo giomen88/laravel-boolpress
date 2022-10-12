@@ -19,9 +19,10 @@
                     <h6> Autore: <strong>@if($post->user) {{$post->user->name}} @else Anonimo @endif</strong></h6>
                     @if($post->category) <span class="badge bg-{{ $post->category->color }} align-self-center">{{$post->category->label}}</span> @endif
                 </div>
-                    {{-- <img src="{{$post->image}}" class="img-fluid" alt="{{$post->title}}"> --}}
-                    <div class="text-center mt-2">
-                        <a href="{{route('admin.posts.show', $post)}}" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass mr-2"></i>Apri post</a>
+                {{-- <img src="{{$post->image}}" class="img-fluid" alt="{{$post->title}}"> --}}
+                <p>{{ $post->getAbstract()}}</p>
+                <div class="text-center mt-2">
+                    <a href="{{route('admin.posts.show', $post)}}" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass mr-2"></i>Apri post</a>
                   </div>
             </div>            
             @endforeach

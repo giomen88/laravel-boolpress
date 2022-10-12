@@ -1948,6 +1948,17 @@ __webpack_require__.r(__webpack_exports__);
   name: "PostCard",
   props: {
     post: Object
+  },
+  computed: {
+    "abstract": function abstract() {
+      return this.post.content.substring(0, 30) + "...";
+    } // formattedCreatedAt() {
+    //   return this.post.created_at.toLocaleString();
+    // },
+    // formattedUpdatedAt() {
+    //   return this.post.updated_at.toLocaleString();
+    // }
+
   }
 });
 
@@ -2130,7 +2141,7 @@ var render = function render() {
     staticClass: "card-title"
   }, [_vm._v(_vm._s(_vm.post.title))]), _vm._v(" "), _c("address", [_c("strong", [_vm._v("Autore:")]), _vm._v(" " + _vm._s(_vm.post.user_id.name))]), _vm._v(" "), _c("p", {
     staticClass: "card-text"
-  }, [_vm._v(_vm._s(_vm.post.content))]), _vm._v(" "), _c("small", [_vm._v("Creato: " + _vm._s(_vm.post.created_at))]), _vm._v(" "), _c("small", [_vm._v("Modificato: " + _vm._s(_vm.post.updated_at))])]), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(_vm["abstract"]))]), _vm._v(" "), _c("small", [_vm._v("Creato: " + _vm._s(_vm.post.created_at))]), _vm._v(" "), _c("small", [_vm._v("Modificato: " + _vm._s(_vm.post.updated_at))])]), _vm._v(" "), _c("div", {
     staticClass: "card-footer text-muted"
   }, [_c("router-link", {
     staticClass: "btn btn-primary",

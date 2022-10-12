@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Post extends Model
 {
@@ -27,10 +28,22 @@ class Post extends Model
 
     // formatto data
 
-    // public function getCreatedAt()
-    // {
-    //     return $this->created_at->format('d/m/Y H:i');
-    // }
+    public function getCreatedAt()
+    {
+        $date = new Carbon($this->created_at);
+        
+       
+        return $date->format('d/m/Y H:i');
+    }
+
+    public function getUpdatedAt()
+    {
+        $date = new Carbon($this->updated_at);
+        
+       
+        return $date->format('d/m/Y H:i');
+    }
+
 
     // public function getUpdatedAt()
     // {

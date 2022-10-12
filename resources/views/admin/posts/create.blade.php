@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-12">
             <h1>CREA POST</h1>
-                <form action=" {{route('admin.posts.store')}} " enctype="multipart/form-data" method="POST">
+                <form action="{{route('admin.posts.store')}} " enctype="multipart/form-data" method="POST">
                 @csrf
                 @include('includes.admin.form')
                 <div class="form-group d-flex justify-content-between mt-5">

@@ -6,7 +6,7 @@
     <div class="card-body d-flex flex-column">
       <h3 class="card-title">{{ post.title }}</h3>
       <address><strong>Autore:</strong> {{ post.user_id.name }}</address>
-      <p class="card-text">{{ post.content }}</p>
+      <p class="card-text">{{ abstract }}</p>
       <small>Creato: {{ post.created_at }}</small>
       <small>Modificato: {{ post.updated_at }}</small>
     </div>
@@ -23,6 +23,19 @@ export default {
   name: "PostCard",
   props: {
     post: Object,
+  },
+  computed: {
+    abstract() {
+      return this.post.content.substring(0, 30) + "...";
+    },
+
+    // formattedCreatedAt() {
+    //   return this.post.created_at.toLocaleString();
+    // },
+
+    // formattedUpdatedAt() {
+    //   return this.post.updated_at.toLocaleString();
+    // }
   },
 };
 </script>

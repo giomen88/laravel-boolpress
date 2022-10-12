@@ -56,10 +56,13 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        
+        // dd($request->image);
+
         $request->validate([
             'title' => 'required|string|min:3|max:50|unique:posts',
             'content' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,jpg,png'
+            'image' => 'bail|nullable|image|max:512|mimes:png'
         ], [
             'title.required' => 'Il titolo è obbligatorio',
             'title.min:5' => 'Il titolo è inferiore a 5 caratteri',
@@ -68,8 +71,9 @@ class PostController extends Controller
             'content.required' => 'Il contenuto è obbligatorio',
             'image.image' => 'Il file caricato non è un\'immagine',
             'image.mimes' => 'Il formato non è valido',
+            'image.max' => 'Il file è troppo pesante. Il massimo consentito è :max kb',
         ]);
-
+        
         $data = $request->all();
 
         $post = new Post();
@@ -80,7 +84,7 @@ class PostController extends Controller
         $post->user_id = Auth::id();
 
         if(array_key_exists('image', $data)) {
-            $image_url = Storage::put('post_images', $data['image']);
+            $image_url = Storage::put('posts', $data['image']);
             $post->image = $image_url;
         }
 
@@ -166,7 +170,7 @@ class PostController extends Controller
 
         if(array_key_exists('image', $data)) {
             if($post->image) Storage::delete($post->image);
-            $image_url = Storage::put('post_images', $data['image']);
+            $image_url = Storage::put('posts', $data['image']);
             $post->image = $image_url;
         }
 
